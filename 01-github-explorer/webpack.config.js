@@ -1,47 +1,47 @@
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebPackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ReactRefreshWebPackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
-const isDevelopment = process.env.NODE_END !== 'production';
+const isDevelopment = process.env.NODE_END !== "production";
 module.exports = {
-  mode: isDevelopment? 'development' : 'production',
-  devtool: isDevelopment? 'eval-source-map' : 'source-map',
-  entry: path.resolve(__dirname, "src", "index.jsx"),
+  mode: isDevelopment ? "development" : "production",
+  devtool: isDevelopment ? "eval-source-map" : "source-map",
+  entry: path.resolve(__dirname, "src", "index.tsx"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
-  devServer : {
-    contentBase: path.resolve(__dirname, 'public'),
+  devServer: {
+    contentBase: path.resolve(__dirname, "public"),
     hot: true,
   },
-  plugins:[
+  plugins: [
     isDevelopment && new ReactRefreshWebPackPlugin(),
-    new HtmlWebpackPlugin ({
-      template: path.resolve(__dirname, 'public', 'index.html')
-    })
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, "public", "index.html"),
+    }),
   ].filter(Boolean),
   module: {
     rules: [
       {
-        test: /\.jsx$/,
+        test: /\.(j|t)sx$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options : {
+          options: {
             plugins: [
-              isDevelopment && require.resolve('react-refresh/babel')
-            ].filter(Boolean)
-          }
+              isDevelopment && require.resolve("react-refresh/babel"),
+            ].filter(Boolean),
+          },
         },
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ['style-loader','css-loader', 'sass-loader'],
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
     ],
   },

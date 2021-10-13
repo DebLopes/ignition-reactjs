@@ -5,8 +5,6 @@
   Ignition - Trilha ReactJs 
 </h2>
 
---- 
-
 
 [![Author](https://img.shields.io/badge/autor-DéboraLopes-sucess?style=flat-square)](https://github.com/DebLopes)
 [![Languages](https://img.shields.io/github/languages/count/DebLopes/ignition-reactjs?color=sucessstyle=flat-square)](#)
